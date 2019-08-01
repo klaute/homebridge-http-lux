@@ -1,5 +1,5 @@
 {
-  "name": "homebridge-ring",
+  "name": "homebridge-http-lux2",
   "description": "http light sensor plugin for homebridge. Requires additional hardware or external url",
   "main": "lib/homebridge/index.js",
   "keywords": [

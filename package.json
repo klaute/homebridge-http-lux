@@ -1,5 +1,5 @@
 {
-  "name": "homebridge-http-lux",
+  "name": "homebridge-http-lux2",
   "version": "1.0.0",
   "description": "http light sensor plugin for homebridge. Requires additional hardware or external url.",
   "main": "index.js",
