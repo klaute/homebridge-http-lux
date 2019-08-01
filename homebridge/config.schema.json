@@ -1,0 +1,47 @@
+{
+  "pluginAlias": "homebridge-http-lux",
+  "pluginType": "accessory",
+  "headerDisplay": "You must supply _either_ **URL & Http Method** the url must return the data un the json format: {
+	\"lightlevel\": 450
+}",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "title": "Name",
+        "type": "string",
+        "placeholder": "HTTP Lux1"
+      },
+      "url": {
+        "title": "Url",
+        "type": "string",
+        "placeholder": "http://"
+      },
+      "http_method": {
+        "title": "Http Method",
+        "type": "string",
+        "placeholder": "GET|POST"
+      }
+    },
+    "oneOf": [
+      {
+        "required": [
+          "name",
+          "url",
+          "http_method"
+        ]
+      }
+    ]
+  },
+  "layout": [
+    {
+      "type": "flex",
+      "flex-flow": "row wrap",
+      "items": [
+          "name",
+          "url",
+          "http_method"
+      ]
+    }
+  ]
+}

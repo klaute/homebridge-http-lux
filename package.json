@@ -1,6 +1,6 @@
 {
   "name": "homebridge-http-lux",
-  "version": "0.6.0",
+  "version": "1.0.0",
   "description": "http light sensor plugin for homebridge. Requires additional hardware.",
   "main": "index.js",
   "scripts": {
@@ -8,18 +8,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/crashtestoz/homebridge-http-lux.git"
+    "url": "git://github.com/epadillac/homebridge-http-lux.git"
   },
   "keywords": [
     "homebridge-plugin"
   ],
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/crashtestoz/homebridge-http-lux/issues"
+    "url": "https://github.com/epadillac/homebridge-http-lux/issues"
   },
   "engines": {
     "node": ">=0.12.0",
-    "homebridge": ">=0.2.0"
+    "homebridge": ">=0.2.0",
+	"homebridge-config-ui-x": "^4.5.1",
   },
   "dependencies": {
     "request": "^2.65.0"
