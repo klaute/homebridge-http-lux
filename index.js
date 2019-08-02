@@ -27,7 +27,7 @@ function HttpLux2(log, config) {
    this.maxLux = config["max_lux"] || DEF_MAX_LUX;
 }
 
-HttpLux.prototype = {
+HttpLux2.prototype = {
 
    getState: function (callback) {
       var ops = {

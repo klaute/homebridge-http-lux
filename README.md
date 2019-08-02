@@ -1,4 +1,4 @@
-# homebridge-http-lux
+# homebridge-http-lux2
 Supports http ambient light sensor devices on the Homebridge platform. Additional hardware required.
 This is a modified version of the https://github.com/metbosch/homebridge-http-temperature plugin.
 This version only supports the light sensor. MAX lightlevel is set to 800.
