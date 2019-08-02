@@ -17,7 +17,7 @@ Configuration sample file:
  ```
  "accessories": [
      {
-         "accessory": "HttpLux",
+         "accessory": "HttpLux2",
          "name": "Ambient Light Level",
          "url": "http://192.168.0.20/api/lightlevel",
          "http_method": "GET"
