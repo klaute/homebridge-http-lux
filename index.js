@@ -2,7 +2,7 @@ var Service, Characteristic;
 var request = require('request');
 
 const DEF_MIN_LUX = 0,
-      DEF_MAX_LUX = 800,
+      DEF_MAX_LUX = 10000,
       DEF_TIMEOUT = 5000;
 
 module.exports = function (homebridge) {
@@ -21,7 +21,7 @@ function HttpLux2(log, config) {
    this.name = config["name"];
    this.manufacturer = config["manufacturer"] || "@crashtestoz";
    this.model = config["model"] || "nodeMCU multi sensor DIY";
-   this.serial = config["serial"] || "20181011";
+   this.serial = config["serial"] || "20220520";
    this.timeout = config["timeout"] || DEF_TIMEOUT;
    this.minLux = config["min_lux"] || DEF_MIN_LUX;
    this.maxLux = config["max_lux"] || DEF_MAX_LUX;
@@ -37,7 +37,7 @@ HttpLux2.prototype = {
       };
 
       //Parse the request sent via http
-      this.log('Requesting light level on "' + ops.uri + '", method ' + ops.method);
+      //this.log('Requesting light level on "' + ops.uri + '", method ' + ops.method);
       request(ops, (error, res, body) => {
          var value = null;
          if (error) {
@@ -48,7 +48,8 @@ HttpLux2.prototype = {
                if (value < this.minLux || value > this.maxLux || isNaN(value)) {
                   throw "Invalid value received";
                }
-               this.log('HTTP successful response: ' + body);
+               this.log("New light level: %f", value);
+               //this.log('HTTP successful response: ' + body);
             } catch (parseErr) {
                this.log('Error processing received information: ' + parseErr.message);
                error = parseErr;
