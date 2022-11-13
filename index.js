@@ -46,13 +46,26 @@ HttpLux2.prototype = {
             try {
                value = JSON.parse(body).lightlevel;
                if (value < this.minLux || value > this.maxLux || isNaN(value)) {
-                  throw "Invalid value received";
+                  throw "Invalid value received json.lightlevel";
                }
                this.log("New light level: %f", value);
                //this.log('HTTP successful response: ' + body);
+
             } catch (parseErr) {
                this.log('Error processing received information: ' + parseErr.message);
-               error = parseErr;
+
+               try {
+                  value = JSON.parse(body).weather.lightlevel;
+                  if (value < this.minLux || value > this.maxLux || isNaN(value)) {
+                     throw "Invalid value received json.weather.lightlevel";
+                  }
+                  this.log("New light level: %f", value);
+
+               } catch (parseErr) {
+                  this.log('Error processing received information: ' + parseErr.message);
+
+                  error = parseErr;
+               }
             }
          }
          callback(error, value);
