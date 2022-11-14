@@ -53,6 +53,7 @@ HttpLux2.prototype = {
 
             } catch (parseErr) {
                this.log('Error processing received information: ' + parseErr.message);
+               this.log('Trying to parse again and read from json.weather');
 
                try {
                   value = JSON.parse(body).weather.lightlevel;
