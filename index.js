@@ -2,8 +2,8 @@ var Service, Characteristic;
 var request = require('request');
 
 const DEF_MIN_LUX = 0,
-      DEF_MAX_LUX = 10000,
-      DEF_TIMEOUT = 5000;
+   DEF_MAX_LUX = 10000,
+   DEF_TIMEOUT = 5000;
 
 module.exports = function (homebridge) {
    Service = homebridge.hap.Service;
@@ -31,7 +31,7 @@ HttpLux2.prototype = {
 
    getState: function (callback) {
       var ops = {
-         uri:    this.url,
+         uri: this.url,
          method: this.http_method,
          timeout: this.timeout
       };
@@ -76,17 +76,17 @@ HttpLux2.prototype = {
    getServices: function () {
       this.informationService = new Service.AccessoryInformation();
       this.informationService
-      .setCharacteristic(Characteristic.Manufacturer, this.manufacturer)
-      .setCharacteristic(Characteristic.Model, this.model)
-      .setCharacteristic(Characteristic.SerialNumber, this.serial);
+         .setCharacteristic(Characteristic.Manufacturer, this.manufacturer)
+         .setCharacteristic(Characteristic.Model, this.model)
+         .setCharacteristic(Characteristic.SerialNumber, this.serial);
 
       this.lightLevelService = new Service.LightSensor(this.name);
       this.lightLevelService
          .getCharacteristic(Characteristic.CurrentAmbientLightLevel)
          .on('get', this.getState.bind(this))
          .setProps({
-             minValue: this.minLux,
-             maxValue: this.maxLux
+            minValue: this.minLux,
+            maxValue: this.maxLux
          });
       return [this.informationService, this.lightLevelService];
    }
