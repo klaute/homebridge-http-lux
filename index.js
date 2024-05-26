@@ -44,29 +44,36 @@ HttpLux2.prototype = {
             this.log('HTTP bad response (' + ops.uri + '): ' + error.message);
          } else {
             try {
-               value = JSON.parse(body).lightlevel;
-               if (value < this.minLux || value > this.maxLux || isNaN(value)) {
-                  throw "Invalid value received json.lightlevel";
-               }
-               this.log("New light level: %f", value);
-               //this.log('HTTP successful response: ' + body);
-
-            } catch (parseErr) {
-               this.log('Error processing received information: ' + parseErr.message);
-               this.log('Trying to parse again and read from json.weather');
-
                try {
-                  value = JSON.parse(body).weather.lightlevel;
+                  value = JSON.parse(body).lightlevel;
                   if (value < this.minLux || value > this.maxLux || isNaN(value)) {
-                     throw "Invalid value received json.weather.lightlevel";
+                     throw "Invalid value received json.lightlevel";
                   }
                   this.log("New light level: %f", value);
+                  //this.log('HTTP successful response: ' + body);
 
                } catch (parseErr) {
                   this.log('Error processing received information: ' + parseErr.message);
+                  this.log('Trying to parse again and read from json.weather');
 
-                  error = parseErr;
+                  try {
+                     value = JSON.parse(body).weather.lightlevel;
+                     if (value < this.minLux || value > this.maxLux || isNaN(value)) {
+                        throw "Invalid value received json.weather.lightlevel";
+                     }
+                     this.log("New light level: %f", value);
+
+                  } catch (parseErr) {
+                     this.log('Error processing received information: ' + parseErr.message);
+
+                     error = parseErr;
+                  }
                }
+            } catch(parseErr) {
+               this.log('Error processing received information: ' + parseErr.message);
+               this.log('Set light level to default value');
+               error = null;
+               value = 65535;
             }
          }
          callback(error, value);
