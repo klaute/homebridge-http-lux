@@ -47,31 +47,36 @@ HttpLux2.prototype = {
                try {
                   value = JSON.parse(body).lightlevel;
                   if (value < this.minLux || value > this.maxLux || isNaN(value)) {
+                     this.log('50: Error processing received information: ' + parseErr.message);
                      throw "Invalid value received json.lightlevel";
                   }
                   this.log("New light level: %f", value);
                   //this.log('HTTP successful response: ' + body);
 
                } catch (parseErr) {
-                  this.log('Error processing received information: ' + parseErr.message);
-                  this.log('Trying to parse again and read from json.weather');
+                  this.log('57: Error processing received information: ' + parseErr.message);
+                  this.log('58: Trying to parse again and read from json.weather');
 
                   try {
                      value = JSON.parse(body).weather.lightlevel;
                      if (value < this.minLux || value > this.maxLux || isNaN(value)) {
                         throw "Invalid value received json.weather.lightlevel";
+                        this.log('64: Set light level to default value');
+                        error = parseErr;
+                        value = 65535;
                      }
                      this.log("New light level: %f", value);
 
                   } catch (parseErr) {
-                     this.log('Error processing received information: ' + parseErr.message);
-
+                     this.log('71: Error processing received information: ' + parseErr.message);
+                     this.log('72: Set light level to default value');
                      error = parseErr;
+                     value = 65535;
                   }
                }
             } catch(parseErr) {
-               this.log('Error processing received information: ' + parseErr.message);
-               this.log('Set light level to default value');
+               this.log('78: Error processing received information: ' + parseErr.message);
+               this.log('79: Set light level to default value');
                error = null;
                value = 65535;
             }
